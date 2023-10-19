@@ -1,6 +1,10 @@
-<p-table [value]="users">
+<p-table [columns]="cols" [value]="users"  styleClass="p-datatable-striped"  >
+
   <ng-template pTemplate="caption">
-    List of Cars
+    <div class="flex align-items-center justify-content-between">
+      Products
+      <p-button icon="pi pi-refresh"></p-button>
+  </div>
 </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -9,9 +13,16 @@
       </th>
   </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-user let-columns="columns">
-    <td *ngFor="let user of columns">
-      {{user[col.field]}}
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+    <td *ngFor="let col of columns">
+      {{rowData[col.field]}}
 </td>
+</tr>
   </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+        In total there are {{users ? users.length : 0 }} products.
+    </div>
+</ng-template>
 </p-table>

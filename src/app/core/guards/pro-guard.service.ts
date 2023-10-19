@@ -20,9 +20,7 @@ class ProdGuardService {
     this.tokenService.getLogged().subscribe((data) => {
       this.isLogged = data;
     });
-    this.tokenService.getAdmin().subscribe((data) => {
-      this.isAdmin = data;
-    });
+
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

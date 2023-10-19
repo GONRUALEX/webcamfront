@@ -11,6 +11,8 @@ import {
 import { LoginUsuario } from 'src/app/shared/models/users/login-usuario';
 import { Forms } from 'src/app/shared/models/forms/forms';
 import { Errors } from 'src/app/shared/models/types/errors';
+import { JwtDTO } from 'src/app/shared/models/auth/jwt-dto';
+import { MasterTable } from '../../../shared/models/master-table';
 
 @Component({
   selector: 'app-login',
@@ -76,6 +78,24 @@ export class LoginComponent implements OnInit {
     this.onLogin(event);
   }
 
+  getRolesToken(token: string): string[]{
+    const payload = token!.split('.')[1];
+    const payloadecode = atob(payload);
+    const values = JSON.parse(payloadecode);
+    return values.roles;
+  }
+
+  mapperRoles(roles: string[]): MasterTable[]{
+    let rolesMasterTable : MasterTable[] = [];
+    for (let role of roles){
+      rolesMasterTable.push({
+        description:role,
+        valid: true,
+      })
+    }
+    return rolesMasterTable;
+  }
+
   onLogin(form: FormGroup): void {
     this.loginUsuario = new LoginUsuario(
       form.value.nameUser,
@@ -83,8 +103,8 @@ export class LoginComponent implements OnInit {
     );
     this.authService.login(this.loginUsuario).subscribe({
       next: (data: any) => {
-        console.log("onLogin", data.token)
         this.tokenService.setToken(data.token);
+        this.tokenService.setRoles(this.mapperRoles(this.getRolesToken(data.token)));
         this.close.emit(true);
         setTimeout(
           () =>

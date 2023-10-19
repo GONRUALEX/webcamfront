@@ -25,6 +25,8 @@ export function sessionInitializer(
             if (roles) {
               tokenService.setRoles(roles);
               tokenService.setToken(token);
+            }else{
+              tokenService.logOut();
             }
           })
         )

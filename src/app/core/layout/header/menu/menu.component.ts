@@ -18,7 +18,6 @@ import { TokenService } from 'src/app/core/services/token.service';
 export class MenuComponent implements OnDestroy {
   @ViewChild('modalTabs', { static: false }) modalTabs: ElementRef;
   isLogged: boolean = false;
-  isAdmin: boolean = false;
   subscription: Subscription[] = [];
   constructor(
     private tokenService: TokenService,
@@ -29,11 +28,6 @@ export class MenuComponent implements OnDestroy {
     this.subscription.map((subscription) => subscription.unsubscribe());
   }
   ngOnInit(): void {
-    this.subscription.push(
-      this.tokenService.getAdmin().subscribe((data: boolean) => {
-        this.isAdmin = data;
-      })
-    );
     this.subscription.push(
       this.tokenService.getLogged().subscribe((data: boolean) => {
         this.isLogged = data;

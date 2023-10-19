@@ -10,7 +10,6 @@ import { RolesEnum } from 'src/app/shared/models/types/roles';
 })
 export class TokenService {
   isVarLogged: Subject<boolean> = new BehaviorSubject(false);
-  isVarAdmin: Subject<boolean> = new BehaviorSubject(false);
   userName: string = '';
   roles: Array<MasterTable> = [];
   constructor(private router: Router) {}
@@ -20,7 +19,6 @@ export class TokenService {
     sessionStorage.setItem(environment.TOKEN_KEY, token);
     this.setUsername();
     this.isLogged();
-    this.isAdmin();
   }
 
   public getToken(): string | null {
@@ -32,6 +30,7 @@ export class TokenService {
       this.sendLogged(true);
     } else {
       this.sendLogged(false);
+      this.roles = [];
     }
   }
 
@@ -47,37 +46,10 @@ export class TokenService {
     return this.userName;
   }
 
-  public isAdmin(): void {
-    console.log('esta el token', this.getToken());
-    if (!this.getToken()) {
-      this.sendLogged(false);
-      return;
-    }
-    const token = this.getToken();
-    const payload = token!.split('.')[1];
-    const payloadecode = atob(payload);
-    const values = JSON.parse(payloadecode);
-    const roles = values.roles;
-    if (roles.indexOf('ROLE_ADMIN') < 0) {
-      this.sendLogged(false);
-    }
-    this.sendAdmin(true);
-    this.sendLogged(true);
-  }
-
   public logOut(): void {
     window.sessionStorage.clear();
     this.isLogged();
-    this.isAdmin();
     this.router.navigate(['/']);
-  }
-
-  public sendAdmin(value: boolean) {
-    this.isVarAdmin.next(value);
-  }
-
-  public getAdmin(): Observable<boolean> {
-    return this.isVarAdmin.asObservable();
   }
 
   public sendLogged(value: boolean) {
