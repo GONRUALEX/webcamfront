@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MaintenanceUserComponent } from './maintenance-user/maintenance-user.component';
-import { PrivateRoutingModule } from './private-routing.module';
-import {TableModule} from 'primeng/table';
+import { MaintenanceUserComponent } from '@pages/private/maintenance-user/maintenance-user.component';
+import { PrivateRoutingModule } from '@pages/private/private-routing.module';
+import { PrimengModule } from '@shared/primeng.module';
 
 @NgModule({
   declarations: [MaintenanceUserComponent],
@@ -23,7 +23,7 @@ import {TableModule} from 'primeng/table';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    TableModule
+    PrimengModule
   ],
 })
 export class PrivateModule {}

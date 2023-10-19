@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -8,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenService } from 'src/app/core/services/token.service';
+import { TokenService } from '@core/services/token.service';
 
 @Component({
   selector: 'app-menu',

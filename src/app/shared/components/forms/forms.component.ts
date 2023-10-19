@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TokenService } from 'src/app/core/services/token.service';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { TokenService } from '@core/services/token.service';
+import { AuthService } from '@core/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Forms } from '../../models/forms/forms';
+import { Forms } from '@shared/models/forms/forms';
 
 @Component({
   selector: 'app-forms',
@@ -24,7 +24,7 @@ export class FormsComponent {
     private fb: FormBuilder
   ) {}
   onLogin(form: FormGroup): void {
-    console.log("forms del form", form)
+    console.log('forms del form', form);
     if (form.valid) this.result.emit(form);
     /*if (!form.valid){
       this.toastr.error("Los campos introducidos no han pasado las validaciones" + ' 😒', 'Fail', {

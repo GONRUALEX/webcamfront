@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Errors } from '../../models/types/errors';
+import { Errors } from '@shared/models/types/errors';
 
 @Component({
   selector: 'app-validations',
   templateUrl: './validations.component.html',
-  styleUrls: ['./validations.component.scss']
+  styleUrls: ['./validations.component.scss'],
 })
 export class ValidationsComponent {
   errorEnum: typeof Errors = Errors;
@@ -14,11 +14,10 @@ export class ValidationsComponent {
   @Input() caractersMax: number;
   @Input() myForm: FormGroup;
   @Input() errors: Errors[];
-  @Input() msgPattern: string ;
+  @Input() msgPattern: string;
 
-  constructor(){
-  }
-  hasError(value:Errors):boolean{
+  constructor() {}
+  hasError(value: Errors): boolean {
     return this.errors.includes(value);
   }
 }

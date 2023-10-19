@@ -5,10 +5,10 @@
     "outDir": "./out-tsc/app",
     "types": [],
     "paths":{
-      "@shared/*":["app/shared/*"],
-      "@pages/*":["app/pages/*"],
-      "@core/*":["app/core/*"],
-      "@assets/*":["assets/*"]
+      "@shared/*":["src/app/shared/*"],
+      "@pages/*":["src/app/pages/*"],
+      "@core/*":["src/app/core/*"],
+      "@assets/*":["src/assets/*"],
     },
   },
   "files": [

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { EmailPasswordService } from '../../../services/email-password.service';
+import { EmailPasswordService } from '@core/services/email-password.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Forms } from 'src/app/shared/models/forms/forms';
-import { ChangePasswordDto } from 'src/app/shared/models/auth/change-password';
-import { Errors } from 'src/app/shared/models/types/errors';
+import { Forms } from '@shared/models/forms/forms';
+import { ChangePasswordDto } from '@shared/models/auth/change-password';
+import { Errors } from '@shared/models/types/errors';
 
 @Component({
   selector: 'app-change-password',

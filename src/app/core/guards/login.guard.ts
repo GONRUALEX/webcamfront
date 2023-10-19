@@ -1,14 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  CanActivate,
   CanActivateFn,
   Router,
   RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { TokenService } from '../services/token.service';
+import { TokenService } from '@core/services/token.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -29,7 +26,7 @@ export class LoginGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    console.log("lkdsfdslkjfdlkjf")
+    console.log('lkdsfdslkjfdlkjf');
     let autority: boolean = false;
     if (route.data['grant'].length == 0) return true;
     if (this.tokenService.hasAuthority(route.data['grant'])) {

@@ -1,11 +1,10 @@
 import { MasterTable } from './../../shared/models/master-table';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TokenService } from '../services/token.service';
-import { AuthService } from '../services/auth.service';
-import { firstValueFrom, catchError, of, tap } from 'rxjs';
-import { JwtDTO } from '../../shared/models/auth/jwt-dto';
-import { CsrfToken } from 'src/app/shared/models/auth/csrf-token';
+import { TokenService } from '@core/services/token.service';
+import { AuthService } from '@core/services/auth.service';
+import { firstValueFrom, tap } from 'rxjs';
+import { JwtDTO } from '@shared/models/auth/jwt-dto';
 
 export function sessionInitializer(
   tokenService: TokenService,
@@ -13,9 +12,7 @@ export function sessionInitializer(
 ) {
   const token = sessionStorage.getItem(environment.TOKEN_KEY);
   if (!token) {
-    return () => {
-
-    };
+    return () => {};
   } else {
     let jwtDto = new JwtDTO(token);
     return () => {
@@ -25,7 +22,7 @@ export function sessionInitializer(
             if (roles) {
               tokenService.setRoles(roles);
               tokenService.setToken(token);
-            }else{
+            } else {
               tokenService.logOut();
             }
           })

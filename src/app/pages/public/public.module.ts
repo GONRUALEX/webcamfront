@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IndexComponent } from './index/index.component';
+import { IndexComponent } from '@pages/public/index/index.component';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PublicRoutingModule } from './public-routing.module';
+import { PublicRoutingModule } from '@pages/public/public-routing.module';
 
 @NgModule({
   declarations: [IndexComponent],

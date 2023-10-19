@@ -14,10 +14,10 @@ import {
   concatMap,
   throwError,
 } from 'rxjs';
-import { TokenService } from '../services/token.service';
+import { TokenService } from '@core/services/token.service';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../services/auth.service';
-import { JwtDTO } from 'src/app/shared/models/auth/jwt-dto';
+import { AuthService } from '@core/services/auth.service';
+import { JwtDTO } from '@shared/models/auth/jwt-dto';
 
 const AUTHORIZATION = 'Authorization';
 @Injectable({
@@ -52,11 +52,9 @@ export class ProdInterceptorService implements HttpInterceptor, OnDestroy {
       const dto: JwtDTO = new JwtDTO(this.tokenService.getToken()!);
       return this.authService.refresh(dto).pipe(
         concatMap((data: any) => {
-
-            this.tokenService.setToken(data.token);
-            intReq = this.addToken(request, data.token);
-            return next.handle(intReq);
-
+          this.tokenService.setToken(data.token);
+          intReq = this.addToken(request, data.token);
+          return next.handle(intReq);
         })
       );
     }

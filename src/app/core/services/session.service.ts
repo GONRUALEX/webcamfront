@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap } from  'rxjs/internal/operators/tap'
+import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -14,8 +13,8 @@ export class SessionService {
     this.csrfToken = token;
   }
 
-  async loadConfig(): Promise<any>{
+  async loadConfig(): Promise<any> {
     let data = this.http.get('assets/config.json');
-    return  await lastValueFrom(data);
+    return await lastValueFrom(data);
   }
 }

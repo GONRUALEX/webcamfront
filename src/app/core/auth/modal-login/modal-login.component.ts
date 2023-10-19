@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { TabsLogin } from 'src/app/shared/models/types/tabs-login';
+import { TabsLogin } from '@shared/models/types/tabs-login';
 
 @Component({
   selector: 'app-modal-login',

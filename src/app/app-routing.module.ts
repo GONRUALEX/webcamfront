@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IsAdminGuard } from './core/guards/pro-guard.service';
-import { IsLoginGuard, LoginGuard } from './core/guards/login.guard';
-import { ChangePasswordComponent } from './core/auth/password/change-password/change-password.component';
-import { MaintenanceUserComponent } from './pages/private/maintenance-user/maintenance-user.component';
-import * as GRANT from './shared/models/Constant/roleConstant';
+import { IsLoginGuard, LoginGuard } from '@core/guards/login.guard';
+import { ChangePasswordComponent } from '@core/auth/password/change-password/change-password.component';
+import * as GRANT from '@shared/models/Constant/roleConstant';
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/public/public.module').then(m => m.PublicModule),
+      import('./pages/public/public.module').then((m) => m.PublicModule),
   },
   {
     path: 'private',
     loadChildren: () =>
-      import('./pages/private/private.module').then(m => m.PrivateModule),
-      data:{
-        grant: [GRANT.ADMIN]
-      },
-      canActivate:[IsLoginGuard]
+      import('./pages/private/private.module').then((m) => m.PrivateModule),
+    data: {
+      grant: [GRANT.ADMIN],
+    },
+    canActivate: [IsLoginGuard],
   },
   //{path:'', component: IndexComponent},
   //{path:'shop',  loadChildren: () => import('./pages/shop/shop.module').then(m => m.ShopModule), canActivate:[IsAdminGuard], data:{expectedRol: ['admin', 'user']}},

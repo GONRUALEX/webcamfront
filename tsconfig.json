@@ -4,10 +4,10 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths":{
-      "@shared/*":["app/shared/*"],
-      "@pages/*":["app/pages/*"],
-      "@core/*":["app/core/*"],
-      "@assets/*":["assets/*"]
+      "@shared/*":["src/app/shared/*"],
+      "@pages/*":["src/app/pages/*"],
+      "@core/*":["src/app/core/*"],
+      "@assets/*":["src/assets/*"],
     },
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true,

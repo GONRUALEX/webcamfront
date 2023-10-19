@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MasterTable } from '../../shared/models/master-table';
-import { RolesEnum } from 'src/app/shared/models/types/roles';
+import { MasterTable } from '@shared/models/master-table';
+import { RolesEnum } from '@shared/models/types/roles';
 
 @Injectable({
   providedIn: 'root',
@@ -70,7 +70,7 @@ export class TokenService {
 
   public hasAuthority(rolesToCheck: RolesEnum[]): boolean {
     // Convierte el array de objetos MasterTable en un conjunto de descripciones para facilitar la búsqueda
-    console.log("roles", this.roles)
+    console.log('roles', this.roles);
     const roleDescriptions = new Set(
       this.roles.map((role) => role.description)
     );

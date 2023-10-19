@@ -1,4 +1,4 @@
-import { MasterTable } from "../master-table";
+import { MasterTable } from "@shared/models/master-table";
 
 export interface User {
   id?:number;

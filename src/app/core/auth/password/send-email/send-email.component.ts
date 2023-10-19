@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { EmailPasswordService } from 'src/app/core/services/email-password.service';
+import { EmailPasswordService } from '@core/services/email-password.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmailValuesDto } from 'src/app/shared/models/auth/email-values-dto';
-import { Forms } from 'src/app/shared/models/forms/forms';
-import { Errors } from 'src/app/shared/models/types/errors';
+import { EmailValuesDto } from '@shared/models/auth/email-values-dto';
+import { Forms } from '@shared/models/forms/forms';
+import { Errors } from '@shared/models/types/errors';
 
 @Component({
   selector: 'app-send-email',

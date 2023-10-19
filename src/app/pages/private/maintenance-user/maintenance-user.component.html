@@ -1,28 +1,142 @@
-<p-table [columns]="cols" [value]="users"  styleClass="p-datatable-striped"  >
-
+<p-table
+  [value]="users"
+  styleClass="p-datatable-striped"
+  [(selection)]="selectedUser"
+  selectionMode="single"
+  dataKey="id"
+  [paginator]="true"
+  [rows]="5"
+  [showCurrentPageReport]="true"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  paginatorLocale="es-es"
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnselect)="onRowUnselect($event)"
+  editMode="row"
+>
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
       Products
       <p-button icon="pi pi-refresh"></p-button>
-  </div>
-</ng-template>
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th *ngFor="let col of columns">
-          {{col.header}}
-      </th>
-  </tr>
+    </div>
   </ng-template>
-  <ng-template pTemplate="body" let-rowData let-columns="columns">
+  <ng-template pTemplate="header">
     <tr>
-    <td *ngFor="let col of columns">
-      {{rowData[col.field]}}
-</td>
-</tr>
+      <th pSortableColumn="name" style="width: 20%">
+        Name <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="nameUser" style="width: 20%">
+        NameUser <p-sortIcon field="nameUser"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email" style="width: 20%">
+        email <p-sortIcon field="email"></p-sortIcon>
+      </th>
+      <th pSortableColumn="createdDate" style="width: 20%">
+        createdDate <p-sortIcon field="createdDate"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-user
+    let-editing="editing"
+    let-ri="rowIndex"
+  >
+    <tr [pSelectableRow]="user" [pEditableRow]="user">
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.name" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.name }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.nameUser" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.nameUser }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.email" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.email }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="date" [(ngModel)]="user.createdDate" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.createdDate | date : "dd/MM/yyyy" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <div class="flex align-items-center justify-content-center gap-2">
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(product)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="onRowEditSave(product)"
+            class="p-button-rounded p-button-text p-button-success mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-times"
+            (click)="onRowEditCancel(product, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="paginatorleft">
+    <p-button
+      type="button"
+      icon="pi pi-plus"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+  <ng-template pTemplate="paginatorright">
+    <p-button
+      type="button"
+      icon="pi pi-cloud"
+      styleClass="p-button-text"
+    ></p-button>
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="flex align-items-center justify-content-between">
-        In total there are {{users ? users.length : 0 }} products.
+      In total there are {{ users ? users.length : 0 }} products.
     </div>
-</ng-template>
+  </ng-template>
 </p-table>

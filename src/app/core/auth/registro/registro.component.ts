@@ -1,12 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TokenService } from '../../services/token.service';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from '@core/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Forms } from 'src/app/shared/models/forms/forms';
-import { Errors } from 'src/app/shared/models/types/errors';
-import { User } from 'src/app/shared/models/users/user';
+import { Forms } from '@shared/models/forms/forms';
+import { Errors } from '@shared/models/types/errors';
+import { User } from '@shared/models/users/user';
 
 @Component({
   selector: 'app-registro',
