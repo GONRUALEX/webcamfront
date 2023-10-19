@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="z-index: 99999">
+  <div class="container">
+    <div class="collapse navbar-collapse navBar" id="navbarNav">
+      <ul class="navbar-nav mr-auto p-2">
+        <li class="nav-item">
+          <a class="nav-link" href="/"><i class="fas fa-home"></i>Inicio</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogged">
+          <a class="nav-link" href="/mantenimiento/lista" *ngIf="isLogged"
+            ><i class="far fa-list-alt"></i>lista</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="isLogged">
+          <a class="nav-link" href="/mantenimiento/nuevo" *ngIf="isAdmin"
+            ><i class="fas fa-plus-circle"></i>Nuevo</a
+          >
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button
+          *ngIf="!isLogged"
+          class="btn btn-outline init initzializer my-2 my-sm-0"
+          data-toggle="modal"
+          data-target=".bd-example-modal-lg"
+        >
+          <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+        </button>
+        <button
+          *ngIf="isLogged"
+          class="btn btn-outline-danger logout my-2 my-sm-0"
+          (click)="onLogout()"
+        >
+          <i class="fas fa-door-open"></i>Cerrar sesión
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div
+  class="modal fade bd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+  #modalTabs
+  id="modalTabs"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="header">
+        <i
+          data-dismiss="modal"
+          aria-label="Close"
+          #modalClose
+          id="modalClose"
+          class="close fa-solid fa-square-xmark close-modal"
+        ></i>
+      </div>
+      <app-modal-login (close)="closeModal($event)"></app-modal-login>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div
+  class="container d-flex justify-content-center animate__animated animate__bounce"
+>
+  <div class="card card-style">
+    <div class="card-header">
+      <h3 class="text-info-tile">Cambia de contraseña</h3>
+    </div>
+    <div class="card-body">
+      <app-forms
+        [myForm]="myForm"
+        [optionsForm]="optionsForm"
+        (result)="getResult($event)"
+      ></app-forms>
+    </div>
+  </div>
+</div>

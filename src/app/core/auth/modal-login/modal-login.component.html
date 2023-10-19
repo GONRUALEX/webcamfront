@@ -1,0 +1,47 @@
+<div class="container d-flex justify-content-center">
+  <div class="card card-style">
+    <div class="card-header">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            class="nav-link auth"
+            [ngClass]="{ 'active bg-active': tab == tabsEnum.LOGIN }"
+            (click)="changeTab(tabsEnum.LOGIN)"
+          >
+            Iniciar sesión
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link auth"
+            [ngClass]="{ 'active bg-active': tab == tabsEnum.REGISTRATION }"
+            (click)="changeTab(tabsEnum.REGISTRATION)"
+            >Crear cuenta</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link auth"
+            [ngClass]="{ 'active bg-active': tab == tabsEnum.RECOVER }"
+            (click)="changeTab(tabsEnum.RECOVER)"
+            >¿Has olvidado la contraseña?</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="card-body animate__animated animate__fadeIn">
+      <app-login
+        *ngIf="tab == tabsEnum.LOGIN"
+        (close)="closeModal($event)"
+      ></app-login>
+      <app-registro
+        *ngIf="tab == tabsEnum.REGISTRATION"
+        (close)="closeModal($event)"
+      ></app-registro>
+      <app-send-email
+        *ngIf="tab == tabsEnum.RECOVER"
+        (close)="closeModal($event)"
+      ></app-send-email>
+    </div>
+  </div>
+</div>

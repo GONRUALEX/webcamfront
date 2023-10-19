@@ -1,0 +1,17 @@
+<p-table [value]="users">
+  <ng-template pTemplate="caption">
+    List of Cars
+</ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+          {{col.header}}
+      </th>
+  </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user let-columns="columns">
+    <td *ngFor="let user of columns">
+      {{user[col.field]}}
+</td>
+  </ng-template>
+</p-table>

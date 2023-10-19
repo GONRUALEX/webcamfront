@@ -1,0 +1,52 @@
+<ng-container *ngIf="myForm.get(field).dirty || myForm.get(field).touched">
+  <p
+    *ngIf="
+      hasError(errorEnum.REQUIRED) &&
+      myForm.get(field).invalid &&
+      myForm.get(field).hasError('required')
+    "
+    class="mt-2 text-sm text-green-500 absolute error-msg"
+  >
+    El {{ field }} es requerido
+  </p>
+  <p
+    *ngIf="
+      hasError(errorEnum.MIN_LENGTH) &&
+      myForm.get(field).invalid &&
+      myForm.get(field).hasError('minlength')
+    "
+    class="mt-2 text-sm text-green-500 absolute error-msg"
+  >
+    El {{ field }} debe tener un mínimo de {{ caractersMin }} caracteres
+  </p>
+  <p
+    *ngIf="
+      hasError(errorEnum.MAX_LENGTH) &&
+      myForm.get(field).invalid &&
+      myForm.get(field).hasError('maxlength')
+    "
+    class="mt-2 text-sm text-green-500 absolute error-msg"
+  >
+    El {{ field }} debe tener un máximo de {{ caractersMax }} caracteres
+  </p>
+  <p
+    *ngIf="
+      hasError(errorEnum.PATTERN) &&
+      myForm.get(field).invalid &&
+      myForm.get(field).hasError('pattern')
+    "
+    class="mt-2 text-sm text-green-500 absolute error-msg"
+  >
+    El {{ field }} no cumple con el patrón, {{ msgPattern }}
+  </p>
+  <p
+    *ngIf="
+      hasError(errorEnum.EMAIL) &&
+      myForm.get(field).invalid &&
+      myForm.get(field).hasError('email')
+    "
+    class="mt-2 text-sm text-green-500 absolute error-msg"
+  >
+    El {{ field }} no cumple con el patrón de email
+  </p>
+</ng-container>

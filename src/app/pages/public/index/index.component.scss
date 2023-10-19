@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1300px;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(241, 241, 241, 0.4);
+
+  perspective: 2000px;
+}
+.img2{
+  left: -100px !important;
+}
+
+.img3{
+  left: 130px !important;
+}
+
+.img4{
+  left: -130px !important;
+}
+#link {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.container>div {
+  animation: rotateInfinite 7s infinite;
+  transform: rotateY(180deg);
+}
+
+.card {
+  width: 92%;
+  height: 92%;
+  margin: 4% auto;
+  transform-style: preserve-3d;
+  transition: transform 1.2s;
+}
+
+.cardFace {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+}
+
+.faceLayer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  border-radius: 20px;
+  overflow: hidden;
+  /* transform: translateZ(1px); */
+}
+
+.middleLayer {
+  position: relative;
+  transform: translateZ(40px) scale(0.98);
+}
+
+.frontLayer {
+  position: relative;
+  transform: translateZ(80px) scale(0.92);
+  margin-top: -538px;
+}
+
+.frontImg {
+  position: absolute;
+  top: -20px;
+  left: 58px;
+  transform: scale(0.70);
+}
+
+.backFace {
+  transform: rotateY(-180deg);
+  backface-visibility: hidden;
+}
+
+.floatShadow {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 100%;
+  box-shadow: 0 -5px 16px 7px rgb(96, 88, 94, 0.7);
+}
+
+
+@keyframes rotateInfinite {
+  0% {
+      transform: rotateY(0deg);
+  }
+
+  31.25% {
+      transform: rotateY(0deg);
+  }
+
+  50% {
+      transform: rotateY(180deg);
+  }
+
+  81.25% {
+      transform: rotateY(180deg);
+  }
+
+  100% {
+      transform: rotateY(0deg);
+  }
+}
