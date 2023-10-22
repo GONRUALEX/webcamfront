@@ -23,6 +23,7 @@ export function sessionInitializer(
               tokenService.setRoles(roles);
               tokenService.setToken(token);
             } else {
+              console.log("hola ")
               tokenService.logOut();
             }
           })

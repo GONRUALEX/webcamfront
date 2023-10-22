@@ -1,8 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '@shared/models/users/user';
+import { User, UserSearch } from '@shared/models/users/user';
 import { environment } from 'src/environments/environment';
+import { Direction, PageRequest } from '@shared/models/pagination/page-request';
+import { Page } from '@shared/models/pagination/page';
+import { LazyLoadEvent } from 'primeng/api';
 enum api {
   LIST = 'list',
 }
@@ -33,7 +36,7 @@ export class UserService {
     return this.httpClient.post<MasterTable[]>(this.authUrl + api.ROLES, dto, { headers: this.httpHeaders })
   }
 */
-  public list(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.url + api.LIST);
+  public list(pageRequest: PageRequest<UserSearch> = new PageRequest<UserSearch>(null, null, null, null, new UserSearch())): Observable<any> {
+    return this.httpClient.post<Page<User>>(this.url + api.LIST, pageRequest);
   }
 }

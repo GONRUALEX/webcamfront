@@ -75,11 +75,11 @@ export class ProdInterceptorService implements HttpInterceptor, OnDestroy {
     const token = this.tokenService.getToken();
 
     intReq = this.addToken(req, token!);
-    return next.handle(intReq).pipe(
+    return next.handle(intReq)/*.pipe(
       catchError((error: HttpErrorResponse) => {
         return this.processRequestError(error, req, next);
       })
-    );
+    );*/
   }
 
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {

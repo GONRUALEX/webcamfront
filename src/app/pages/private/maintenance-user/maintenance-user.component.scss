@@ -1,0 +1,51 @@
+::ng-deep {
+  .p-column-filter-menu-button {
+    display: none;
+  }
+  .p-column-filter-clear-button {
+    display: none;
+  }
+}
+
+.loading {
+  min-height: 400px;
+  width: 100px;
+}
+
+.button-table {
+  border: none;
+  background-color: transparent;
+}
+
+.icon-table {
+  color: greenyellow;
+  font-size: 20px;
+  padding: 10px;
+  border: 1px solid skyblue;
+  border-radius: 20px;
+}
+
+.icon-table:hover {
+  scale: 1.2;
+  color: aqua;
+}
+
+th {
+  color: cadetblue;
+}
+
+input {
+  border-color: aliceblue;
+  background-color: whitesmoke;
+  color: cadetblue;
+}
+
+td {
+  color: lightskyblue;
+}
+
+.header-table{
+  text-align: center;
+  font-size: x-large;
+  color: darkcyan;
+}

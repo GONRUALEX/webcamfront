@@ -1,5 +1,6 @@
 <p-table
   [value]="users"
+  [lazy]="true"
   styleClass="p-datatable-striped"
   [(selection)]="selectedUser"
   selectionMode="single"
@@ -9,31 +10,54 @@
   [showCurrentPageReport]="true"
   [tableStyle]="{ 'min-width': '50rem' }"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [rowsPerPageOptions]="[10, 25, 50]"
+  [rowsPerPageOptions]="[5, 10, 25, 50]"
   paginatorLocale="es-es"
   (onRowSelect)="onRowSelect($event)"
   (onRowUnselect)="onRowUnselect($event)"
   editMode="row"
+  [totalRecords]="totalRecords"
+  [selectAll]="selectAll"
+  (selectionChange)="onSelectionChange($event)"
+  (onLazyLoad)="loadUsers($event)"
+  [globalFilterFields]="['name', 'nameUser', 'email', 'createdDate']"
 >
   <ng-template pTemplate="caption">
-    <div class="flex align-items-center justify-content-between">
-      Products
+    <div class="header-table flex align-items-center justify-content-center">
+      Usuarios
       <p-button icon="pi pi-refresh"></p-button>
     </div>
   </ng-template>
   <ng-template pTemplate="header">
+    <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
     <tr>
-      <th pSortableColumn="name" style="width: 20%">
-        Name <p-sortIcon field="name"></p-sortIcon>
+      <th pSortableColumn="name">
+        Name <p-sortIcon field="name" (onFilter)="printFilteredUsers($event)"></p-sortIcon>
       </th>
-      <th pSortableColumn="nameUser" style="width: 20%">
+      <th pSortableColumn="nameUser">
         NameUser <p-sortIcon field="nameUser"></p-sortIcon>
       </th>
-      <th pSortableColumn="email" style="width: 20%">
-        email <p-sortIcon field="email"></p-sortIcon>
+      <th pSortableColumn="email">
+        Email <p-sortIcon field="email"></p-sortIcon>
       </th>
-      <th pSortableColumn="createdDate" style="width: 20%">
-        createdDate <p-sortIcon field="createdDate"></p-sortIcon>
+      <th pSortableColumn="createdDate">
+        Creation date <p-sortIcon field="createdDate"></p-sortIcon>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter   type="text" field="name" ></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="nameUser"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="email"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="createdDate"></p-columnFilter>
       </th>
     </tr>
   </ng-template>
@@ -88,34 +112,34 @@
         <div class="flex align-items-center justify-content-center gap-2">
           <button
             *ngIf="!editing"
-            pButton
             pRipple
             type="button"
             pInitEditableRow
-            icon="pi pi-pencil"
-            (click)="onRowEditInit(product)"
-            class="p-button-rounded p-button-text"
-          ></button>
+            (click)="onRowEditInit(user)"
+            class="button-table"
+          >
+            <i class="pi pi-pencil icon-table"></i>
+          </button>
           <button
             *ngIf="editing"
-            pButton
             pRipple
             type="button"
             pSaveEditableRow
-            icon="pi pi-check"
-            (click)="onRowEditSave(product)"
-            class="p-button-rounded p-button-text p-button-success mr-2"
-          ></button>
+            (click)="onRowEditSave(user)"
+            class="button-table"
+          >
+            <i class="pi pi-check icon-table"></i>
+          </button>
           <button
             *ngIf="editing"
-            pButton
             pRipple
             type="button"
             pCancelEditableRow
-            icon="pi pi-times"
-            (click)="onRowEditCancel(product, ri)"
-            class="p-button-rounded p-button-text p-button-danger"
-          ></button>
+            (click)="onRowEditCancel(user, ri)"
+            class="button-table"
+          >
+            <i class="pi pi-times icon-table"></i>
+          </button>
         </div>
       </td>
     </tr>
@@ -134,9 +158,10 @@
       styleClass="p-button-text"
     ></p-button>
   </ng-template>
+
   <ng-template pTemplate="summary">
     <div class="flex align-items-center justify-content-between">
-      In total there are {{ users ? users.length : 0 }} products.
+      Hay un total de {{ users ? users.length : 0 }} usuarios.
     </div>
   </ng-template>
 </p-table>

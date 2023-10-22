@@ -98,6 +98,7 @@ export class LoginComponent implements OnInit {
     );
     this.authService.login(this.loginUsuario).subscribe({
       next: (data: any) => {
+        console.log("login")
         this.tokenService.setToken(data.token);
         this.tokenService.setRoles(
           this.mapperRoles(this.getRolesToken(data.token))
