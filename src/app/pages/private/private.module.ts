@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaintenanceUserComponent } from '@pages/private/maintenance-user/maintenance-user.component';
 import { PrivateRoutingModule } from '@pages/private/private-routing.module';
 import { PrimengModule } from '@shared/primeng.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [MaintenanceUserComponent],
@@ -23,7 +24,8 @@ import { PrimengModule } from '@shared/primeng.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    PrimengModule
+    PrimengModule,
+    SharedModule
   ],
 })
 export class PrivateModule {}

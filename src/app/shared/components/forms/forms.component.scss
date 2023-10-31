@@ -1,0 +1,24 @@
+::ng-deep {
+  .p-multiselect.p-multiselect-chip .p-multiselect-token {
+    color: darkcyan;
+  }
+  .p-dropdown-label {
+    color: darkcyan;
+  }
+
+  .p-checkbox-box {
+    background-color: darkcyan;
+  }
+  input {
+    color: darkcyan !important;
+    font-weight: 500 !important;
+  }
+
+  .text-info{
+    color: mediumturquoise !important;
+  }
+}
+
+.field {
+  padding-top: 15px;
+}

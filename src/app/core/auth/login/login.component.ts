@@ -8,6 +8,7 @@ import { LoginUsuario } from '@shared/models/users/login-usuario';
 import { Forms } from '@shared/models/forms/forms';
 import { Errors } from '@shared/models/types/errors';
 import { MasterTable } from '@shared/models/master-table';
+import { TypeForms } from '@shared/models/types/type-forms';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
           Errors.PATTERN,
         ],
         name: 'Contraseña',
+        type: TypeForms.PASSWORD
       },
     ];
     this.myForm = this.fb.group({

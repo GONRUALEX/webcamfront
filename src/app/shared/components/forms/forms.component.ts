@@ -1,21 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TokenService } from '@core/services/token.service';
 import { AuthService } from '@core/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Forms } from '@shared/models/forms/forms';
+import { TypeForms } from '@shared/models/types/type-forms';
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss'],
 })
-export class FormsComponent {
-  @Input() optionsForm: Forms[];
+export class FormsComponent implements OnInit{
+  @Input() optionsForm: Forms[] = [];
   @Input() myForm: FormGroup;
   @Output() result = new EventEmitter<FormGroup>();
-
+  sizeElements: number;
+  TypeForms =  TypeForms;
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
@@ -23,6 +25,12 @@ export class FormsComponent {
     private toastr: ToastrService,
     private fb: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    setTimeout(()=>console.log(this.optionsForm, "options form"),2000)
+    this.optionsForm != null?this.sizeElements = this.optionsForm.length:"";
+    console.log('forms del form', this.optionsForm);
+  }
   onLogin(form: FormGroup): void {
     console.log('forms del form', form);
     if (form.valid) this.result.emit(form);
@@ -69,4 +77,6 @@ export class FormsComponent {
   reset() {
     this.myForm.reset();
   }
+
+
 }

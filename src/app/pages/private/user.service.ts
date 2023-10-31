@@ -13,14 +13,14 @@ enum api {
   providedIn: 'root',
 })
 export class UserService {
-  url = environment.apiUrl + '/users/';
+  private url = environment.apiUrl + '/users/';
   private httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'X-Frame-Options': 'deny',
   });
   constructor(private httpClient: HttpClient) {}
 
-  public nuevo(newUser: User): Observable<User> {
+  public newOrUpdate(newUser: User): Observable<User> {
     return this.httpClient.post<User>(this.url + 'create', newUser);
   }
   /*

@@ -1,167 +1,360 @@
-<p-table
-  [value]="users"
-  [lazy]="true"
-  styleClass="p-datatable-striped"
-  [(selection)]="selectedUser"
-  selectionMode="single"
-  dataKey="id"
-  [paginator]="true"
-  [rows]="5"
-  [showCurrentPageReport]="true"
-  [tableStyle]="{ 'min-width': '50rem' }"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [rowsPerPageOptions]="[5, 10, 25, 50]"
-  paginatorLocale="es-es"
-  (onRowSelect)="onRowSelect($event)"
-  (onRowUnselect)="onRowUnselect($event)"
-  editMode="row"
-  [totalRecords]="totalRecords"
-  [selectAll]="selectAll"
-  (selectionChange)="onSelectionChange($event)"
-  (onLazyLoad)="loadUsers($event)"
-  [globalFilterFields]="['name', 'nameUser', 'email', 'createdDate']"
->
-  <ng-template pTemplate="caption">
-    <div class="header-table flex align-items-center justify-content-center">
-      Usuarios
-      <p-button icon="pi pi-refresh"></p-button>
-    </div>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <ngx-loading
-  [show]="loading"
-  [config]="{ backdropBorderRadius: '3px' }"
-  ></ngx-loading>
-    <tr>
-      <th pSortableColumn="name">
-        Name <p-sortIcon field="name" (onFilter)="printFilteredUsers($event)"></p-sortIcon>
-      </th>
-      <th pSortableColumn="nameUser">
-        NameUser <p-sortIcon field="nameUser"></p-sortIcon>
-      </th>
-      <th pSortableColumn="email">
-        Email <p-sortIcon field="email"></p-sortIcon>
-      </th>
-      <th pSortableColumn="createdDate">
-        Creation date <p-sortIcon field="createdDate"></p-sortIcon>
-      </th>
-    </tr>
-    <tr>
-      <th>
-        <p-columnFilter   type="text" field="name" ></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="text" field="nameUser"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="text" field="email"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="text" field="createdDate"></p-columnFilter>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template
-    pTemplate="body"
-    let-user
-    let-editing="editing"
-    let-ri="rowIndex"
+<div class="container">
+  <p-table
+    [value]="users"
+    [lazy]="true"
+    styleClass="p-datatable-striped table"
+    [(selection)]="selectedUser"
+    selectionMode="single"
+    dataKey="id"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 25, 50]"
+    paginatorLocale="es-es"
+    (onRowSelect)="onRowSelect($event)"
+    (onRowUnselect)="onRowUnselect($event)"
+    editMode="row"
+    [totalRecords]="totalRecords"
+    [selectAll]="selectAll"
+    (selectionChange)="onSelectionChange($event)"
+    (onLazyLoad)="loadUsers($event)"
+    [globalFilterFields]="['name', 'nameUser', 'email', 'createdDate']"
   >
-    <tr [pSelectableRow]="user" [pEditableRow]="user">
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="text" [(ngModel)]="user.name" />
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{ user.name }}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="text" [(ngModel)]="user.nameUser" />
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{ user.nameUser }}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="text" [(ngModel)]="user.email" />
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{ user.email }}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="date" [(ngModel)]="user.createdDate" />
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{ user.createdDate | date : "dd/MM/yyyy" }}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td>
-        <div class="flex align-items-center justify-content-center gap-2">
-          <button
-            *ngIf="!editing"
-            pRipple
-            type="button"
-            pInitEditableRow
-            (click)="onRowEditInit(user)"
-            class="button-table"
-          >
-            <i class="pi pi-pencil icon-table"></i>
-          </button>
-          <button
-            *ngIf="editing"
-            pRipple
-            type="button"
-            pSaveEditableRow
-            (click)="onRowEditSave(user)"
-            class="button-table"
-          >
-            <i class="pi pi-check icon-table"></i>
-          </button>
-          <button
-            *ngIf="editing"
-            pRipple
-            type="button"
-            pCancelEditableRow
-            (click)="onRowEditCancel(user, ri)"
-            class="button-table"
-          >
-            <i class="pi pi-times icon-table"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="paginatorleft">
-    <p-button
-      type="button"
-      icon="pi pi-plus"
-      styleClass="p-button-text"
-    ></p-button>
-  </ng-template>
-  <ng-template pTemplate="paginatorright">
-    <p-button
-      type="button"
-      icon="pi pi-cloud"
-      styleClass="p-button-text"
-    ></p-button>
-  </ng-template>
+    <ng-template pTemplate="caption">
+      <div class="header-table flex align-items-center justify-content-center">
+        Usuarios
+      </div>
+      <div class="divButton-plus">
+        <button class="button-plus" p-button [outlined]="true" (click)="showEditForm()">
+          <i class="pi pi-plus"></i>
+          <span class="ml-2 font-bold">Nuevo</span>
+        </button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <ngx-loading
+        [show]="loading"
+        [config]="{ backdropBorderRadius: '3px' }"
+      ></ngx-loading>
+      <tr>
+        <!--<th pSortableColumn="name">
+        Name <p-sortIcon field="name" (onFilter)="printFilteredUsers($event)"></p-sortIcon>
+      </th>-->
+        <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="name">
+          Nombre <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="imagePerfil">
+          Imagen de perfil <p-sortIcon field="imagePerfil"></p-sortIcon>
+        </th>
+        <th pSortableColumn="nameUser">
+          Nombre Usuario <p-sortIcon field="nameUser"></p-sortIcon>
+        </th>
+        <th pSortableColumn="email">
+          Email <p-sortIcon field="email"></p-sortIcon>
+        </th>
+        <th pSortableColumn="password">
+          Contraseña <p-sortIcon field="password"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roles">
+          Roles <p-sortIcon field="roles"></p-sortIcon>
+        </th>
+        <th pSortableColumn="lastName1">
+          Apellido 1<p-sortIcon field="lastName1"></p-sortIcon>
+        </th>
+        <th pSortableColumn="lastName2">
+          Apellido 2<p-sortIcon field="lastName2"></p-sortIcon>
+        </th>
+        <th pSortableColumn="createdDate">
+          Fecha de creación <p-sortIcon field="createdDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="language">
+          Idioma <p-sortIcon field="language"></p-sortIcon>
+        </th>
+        <th pSortableColumn="createdBy">
+          Creado por <p-sortIcon field="createdBy"></p-sortIcon>
+        </th>
+        <th pSortableColumn="lastMofifiedDate">
+          Fecha última modificación
+          <p-sortIcon field="lastMofifiedDate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="modifiedBy">
+          Modificado por <p-sortIcon field="modifiedBy"></p-sortIcon>
+        </th>
+        <th pSortableColumn="stateAccount">
+          Estado de la cuenta <p-sortIcon field="stateAccount"></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <p-columnFilter type="text" field="id"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="name"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="imagePerfil"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="nameUser"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="email"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="password"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="roles"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="lastName1"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="lastName2"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="createdDate"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="language"></p-columnFilter>
+        </th>
 
-  <ng-template pTemplate="summary">
-    <div class="flex align-items-center justify-content-between">
-      Hay un total de {{ users ? users.length : 0 }} usuarios.
-    </div>
-  </ng-template>
-</p-table>
+        <th>
+          <p-columnFilter type="text" field="createdBy"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="lastMofifiedDate"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="modifiedBy"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="stateAccount"></p-columnFilter>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-user
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr [pSelectableRow]="user" [pEditableRow]="user">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.id" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.id }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.name" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.imagePerfil" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.imagePerfil }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.nameUser" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.nameUser }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.email" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.email }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.password" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.password }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.roles" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              <span *ngFor="let rol of user.roles">
+                {{ rol.description }}
+              </span>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.lastName1" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.lastName1 }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.lastName2" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.lastName2 }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="date" [(ngModel)]="user.createdDate" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.createdDate | date : "dd/MM/yyyy" }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.language" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.language? user.language.description:'' }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.createdBy" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.createdBy }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="date"
+                [(ngModel)]="user.lastMofifiedDate"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.lastMofifiedDate | date : "dd/MM/yyyy" }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.modifiedBy" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.modifiedBy }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user.stateAccount" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.stateAccount?"Activa":"inactiva" }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              *ngIf="!editing"
+              pRipple
+              type="button"
+              pInitEditableRow
+              (click)="onRowEditInit(user)"
+              class="button-table"
+            >
+              <i class="pi pi-pencil icon-table"></i>
+            </button>
+            <button
+              *ngIf="editing"
+              pRipple
+              type="button"
+              pSaveEditableRow
+              (click)="onRowEditSave(user)"
+              class="button-table"
+            >
+              <i class="pi pi-check icon-table"></i>
+            </button>
+            <button
+              *ngIf="editing"
+              pRipple
+              type="button"
+              pCancelEditableRow
+              (click)="onRowEditCancel(user, ri)"
+              class="button-table"
+            >
+              <i class="pi pi-times icon-table"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <div class="pagination flex align-items-center justify-content-between">
+        Hay un total de {{ users ? users.length : 0 }} usuarios.
+      </div>
+    </ng-template>
+  </p-table>
+  <div #targetElement></div>
+  <p-card [style]="{ width: '100% ' }" *ngIf="showForm">
+    <ng-template pTemplate="header" class="header-card">
+        <h3>Edición</h3>
+    </ng-template>
+    <app-forms
+    [myForm]="myForm"
+    [optionsForm]="optionsForm"
+    (result)="getResult($event)"
+  ></app-forms>
+   <!-- <ng-template pTemplate="footer">
+        <button class="button-plus" label="Save" icon="pi pi-check">Guardar</button>
+        <button class="button-plus" label="Cancel" icon="pi pi-times">Cancelar</button>
+    </ng-template>-->
+</p-card>
+</div>

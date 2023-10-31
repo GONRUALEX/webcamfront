@@ -5,3 +5,4 @@ export enum Errors {
   PATTERN = 'El campo tiene que tener un formato específico:',
   EMAIL = 'El formato de emai no es correcto',
 }
+

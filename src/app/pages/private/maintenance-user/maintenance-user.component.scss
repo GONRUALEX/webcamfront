@@ -5,8 +5,81 @@
   .p-column-filter-clear-button {
     display: none;
   }
+
+  .p-datatable-header{
+    background-color:white !important;
+  }
+
+  table{
+    border:1px solid darkcyan !important;
+  }
+
+  .p-datatable-wrapper::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  .p-datatable-wrapper::-webkit-scrollbar:vertical {
+    width:10px;
+  }
+
+  .p-datatable-wrapper::-webkit-scrollbar-button:increment,td::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .p-datatable-wrapper::-webkit-scrollbar:horizontal {
+    height: 10px;
+  }
+
+  .p-datatable-wrapper::-webkit-scrollbar-thumb {
+    background-color: darkcyan;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+  }
+
+  .p-datatable-wrapper::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  .p-paginator-current, .p-ripple{
+    color: darkcyan !important;
+  }
+
+  .p-highlight{
+    color:rgb(45, 90, 90) !important;
+    border:2px solid darkcyan;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  .p-card-header{
+    text-align: center;
+    border-bottom: 1px solid darkcyan;
+  }
 }
 
+.divButton-plus{
+  display: flex;
+    justify-content: flex-end;
+}
+
+.button-plus{
+  font-weight: 600;
+  color: darkcyan;
+  border: 1px solid darkcyan;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 2px 2px 8px darkcyan;
+}
+
+.button-plus:hover{
+  scale:1.1;
+  background-color: whitesmoke;
+
+}
+
+.pagination{
+  color:darkcyan;
+}
 .loading {
   min-height: 400px;
   width: 100px;
@@ -15,6 +88,7 @@
 .button-table {
   border: none;
   background-color: transparent;
+  color: darkcyan
 }
 
 .icon-table {
@@ -41,11 +115,54 @@ input {
 }
 
 td {
-  color: lightskyblue;
+  color: mediumturquoise;
 }
 
 .header-table{
   text-align: center;
   font-size: x-large;
   color: darkcyan;
+}
+
+
+.table{
+  table-layout: fixed;
+}
+
+th,td{
+  max-width: 160px;
+  min-width: 140px;
+  overflow : auto
+}
+
+td::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+td::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+td::-webkit-scrollbar-button:increment,td::-webkit-scrollbar-button {
+  display: none;
+}
+
+td::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+td::-webkit-scrollbar-thumb {
+  background-color: darkcyan;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+td::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+h3{
+  color: darkcyan;
+    padding-top: 20px;
+    font-weight: 600;
 }
